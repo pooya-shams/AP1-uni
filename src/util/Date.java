@@ -13,6 +13,31 @@ public class Date // week day + hour + length
 		this.length = length;
 	}
 
+	@Override
+	public boolean equals(Object o)
+	{
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Date date = (Date) o;
+		return even_days == date.even_days && start == date.start && length == date.length;
+	}
+
+	public boolean interferes(Date o) // checks if a course interferes with another course
+	{
+		if(o == null) return false;
+		if(this.even_days != o.even_days) return false;
+		return this.getr() > o.getl() && o.getr() > this.getl();
+	}
+
+	private int getl()
+	{
+		return this.start;
+	}
+	private int getr()
+	{
+		return this.start + this.length;
+	}
+
 	public boolean isEven_days()
 	{
 		return even_days;
