@@ -11,6 +11,7 @@ public class Date // week day + hour + length
 		this.even_days = even_days;
 		this.start = start;
 		this.length = length;
+		assert this.length >= 0;
 	}
 
 	@Override
