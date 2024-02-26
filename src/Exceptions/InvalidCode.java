@@ -1,6 +1,6 @@
 package Exceptions;
 
-public class InvalidCode extends IllegalArgumentException
+public class InvalidCode extends Exception
 {
 	public InvalidCode()
 	{
