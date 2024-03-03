@@ -14,7 +14,7 @@ public class IOHelper
 	{
 		ArrayList<String> valids = new ArrayList<>(List.of(vlds)); // guh this is stupid
 		String mf;
-		mf = sc.nextLine();
+		mf = sc.nextLine().trim();
 		while(!valids.contains(mf))
 		{
 			System.out.println("your input '"+mf+"' is not a valid option");
@@ -23,7 +23,7 @@ public class IOHelper
 				System.out.print(v+", ");
 			System.out.println();
 			System.out.println("enter a real value: ");
-			mf = sc.nextLine();
+			mf = sc.nextLine().trim();
 		}
 		return mf;
 	}

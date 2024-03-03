@@ -44,9 +44,9 @@ public class Application
 	private void student_login() // oh and also camel case is nonsense
 	{
 		System.out.print("enter your username: ");
-		String username = sc.nextLine();
+		String username = sc.nextLine().trim();
 		System.out.print("enter your password: ");
-		String password = sc.nextLine();
+		String password = sc.nextLine().trim();
 		for(User mf: Users.users) // relies on the fact that there wont be duplicate usernames
 		{
 			if(username.equals(mf.getUsername()))
