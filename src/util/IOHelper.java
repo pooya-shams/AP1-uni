@@ -10,21 +10,38 @@ import java.util.Scanner;
 
 public class IOHelper
 {
-	public static String get_valid_input(String[] vlds, Scanner sc)
+	public static boolean is_numeric(String s)
 	{
-		ArrayList<String> valids = new ArrayList<>(List.of(vlds)); // guh this is stupid
+		for(char ch: s.toCharArray())
+			if(!Character.isDigit(ch))
+				return false;
+		return true;
+	}
+	public static int str_to_int(String s)
+	{
+		if(!is_numeric(s))
+			throw new IllegalArgumentException("String "+s+" is not a numeric string");
+		int t = 0;
+		for(char ch: s.toCharArray())
+			t = t*10 + (ch-'0');
+		return t;
+	}
+	public static boolean in_range(int x, int min, int max)
+	{
+		return min <= x && x <= max;
+	}
+	public static int get_valid_input(int max_opt, Scanner sc)
+	{
 		String mf;
 		mf = sc.nextLine().trim();
-		while(!valids.contains(mf))
+		while( ! (IOHelper.is_numeric(mf) && IOHelper.in_range(IOHelper.str_to_int(mf), 0, max_opt) ) )
 		{
 			System.out.println("your input '"+mf+"' is not a valid option");
-			System.out.print("valid options are: ");
-			for(String v: valids)
-				System.out.print(v+", ");
+			System.out.print("valid options are numbers 0 through "+max_opt);
 			System.out.println();
 			System.out.println("enter a real value: ");
 			mf = sc.nextLine().trim();
 		}
-		return mf;
+		return str_to_int(mf);
 	}
 }
