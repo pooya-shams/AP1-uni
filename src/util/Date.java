@@ -65,4 +65,10 @@ public class Date // week day + hour + length
 	{
 		this.length = length;
 	}
+
+	@Override
+	public String toString()
+	{
+		return (this.even_days ? "Saturday & Monday" : "Sunday & Tuesday") + " from " + start + " until " + (start+length);
+	}
 }

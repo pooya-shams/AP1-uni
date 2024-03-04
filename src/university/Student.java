@@ -46,10 +46,30 @@ public class Student extends User
 	}
 	public void print_courses()
 	{
-		// TODO
+		for(Course c: this.courses)
+		{
+			System.out.println("----------");
+			System.out.println(c);
+		}
+		if(this.courses.isEmpty())
+			System.out.println("you have no registered course");
 	}
 	public void remove_course(int code)
 	{
-		// TODO
+		int index = -1;
+		for(int i = 0; i < this.courses.size(); i++)
+		{
+			if(this.courses.get(i).getCode() == code)
+				index = i;
+		}
+		if(index == -1)
+		{
+			System.out.println("invalid code couldn't remove");
+		}
+		else
+		{
+			this.courses.remove(index);
+			System.out.println("removed course with code "+code);
+		}
 	}
 }

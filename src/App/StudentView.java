@@ -35,7 +35,9 @@ public class StudentView
 			{
 				this.user.print_courses();
 				System.out.print("if you want to remove a course enter its code otherwise enter 0 to go back: ");
-				String code = sc.nextLine();
+				String code = sc.nextLine().trim();
+				if(code.equals("0"))
+					continue;
 				if(!IOHelper.is_numeric(code))
 				{
 					System.out.println("invalid code");
