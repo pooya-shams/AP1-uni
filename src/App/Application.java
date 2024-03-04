@@ -17,22 +17,30 @@ public class Application
 	public void run()
 	{
 		System.out.println("Welcome!");
+		System.out.println("you can always go back by typing 0");
 		while(true)
 		{
-			this.general_login();
+			if(this.general_login())
+				return;
 		}
 	}
-	private void general_login()
+	private boolean general_login() // returns if we should die
 	{
 		System.out.print("Choose your login type:\n"+
+			"[0] Exit\n" +
 			"[1] Student\n"+
 			"[2] Admin\n");
-		String type = IOHelper.get_valid_input( new String[]{"1", "2"}, sc ); // I fucking hate java you stupid piece of shit
-		if(type.equals("1"))
+		int type = IOHelper.get_valid_input(2, sc); // I fucking hate java you stupid piece of shit
+		if(type == 0)
+		{
+			System.out.println("See you next time!");
+			return true;
+		}
+		else if(type == 1)
 		{
 			student_login();
 		}
-		else if(type.equals("2"))
+		else if(type == 2)
 		{
 			admin_login();
 		}
@@ -40,6 +48,7 @@ public class Application
 		{
 			System.err.println("nope not possible");
 		}
+		return false;
 	}
 	private void student_login() // oh and also camel case is nonsense
 	{
