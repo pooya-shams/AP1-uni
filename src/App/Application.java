@@ -1,11 +1,10 @@
 package App;
 
 import data.Users;
+import university.Student;
 import university.User;
 import util.IOHelper;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Application
@@ -26,10 +25,10 @@ public class Application
 	}
 	private boolean general_login() // returns if we should die
 	{
-		System.out.print("Choose your login type:\n"+
+		System.out.println("Choose your login type:\n"+
 			"[0] Exit\n" +
 			"[1] Student\n"+
-			"[2] Admin\n");
+			"[2] Admin");
 		int type = IOHelper.get_valid_input(2, sc); // I fucking hate java you stupid piece of shit
 		if(type == 0)
 		{
@@ -54,16 +53,16 @@ public class Application
 	{
 		System.out.print("enter your username: ");
 		String username = sc.nextLine().trim();
-		System.out.print("enter your password: ");
+		System.out.print("enter your password (can't end with whitespace): ");
 		String password = sc.nextLine().trim();
-		for(User mf: Users.users) // relies on the fact that there wont be duplicate usernames
+		for(Student mf: Users.studnets) // relies on the fact that there wont be duplicate usernames
 		{
 			if(username.equals(mf.getUsername()))
 			{
 				if(password.equals(mf.getPassword()))
 				{
 					System.out.println("Congrats! successful login");
-					new StudentView(mf).run();
+					new StudentView(mf, sc).run();
 					return;
 				}
 				else
@@ -77,6 +76,25 @@ public class Application
 	}
 	private void admin_login()
 	{
-		// TODO
+		System.out.print("enter your username: ");
+		String username = sc.nextLine().trim();
+		System.out.print("enter your password (can't end with whitespace): ");
+		String password = sc.nextLine().trim();
+		if(username.equals(Users.admin.getUsername()))
+		{
+			if(password.equals(Users.admin.getPassword()))
+			{
+				System.out.println("Congrats you hacked the mainframe");
+				new AdminView(Users.admin).run();
+			}
+			else
+			{
+				System.out.println("Invalid password");
+			}
+		}
+		else
+		{
+			System.out.println("Invalid username");
+		}
 	}
 }

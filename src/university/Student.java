@@ -44,4 +44,12 @@ public class Student extends User
 		}
 		this.courses.add(c);
 	}
+	public void print_courses()
+	{
+		// TODO
+	}
+	public void remove_course(int code)
+	{
+		// TODO
+	}
 }
