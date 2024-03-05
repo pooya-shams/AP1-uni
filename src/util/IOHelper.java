@@ -2,6 +2,7 @@ package util;
 
 import data.Departments;
 import university.Department;
+import university.course.Course;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -64,6 +65,25 @@ public class IOHelper
 		{
 			System.out.println("your input '"+mf+"' is not a valid option");
 			System.out.print("please enter a real department code or 0: ");
+			mf = sc.nextLine().trim();
+		}
+		return str_to_int(mf);
+	}
+	public static boolean is_real_course_code_in_dep(int dep_code, int n)
+	{
+		Department dep = Departments.get_dep_by_code(dep_code);
+		if(dep == null)
+			return false;
+		return n == 0 || dep.get_course(n) != null;
+	}
+	public static int get_course_code(Scanner sc, int dep_code)
+	{
+		System.out.print("choose course by code (or 0 to go back): ");
+		String mf = sc.nextLine().trim();
+		while( ! (IOHelper.is_numeric(mf) && IOHelper.is_real_course_code_in_dep(dep_code, IOHelper.str_to_int(mf)) ) )
+		{
+			System.out.println("your input '"+mf+"' is not a valid option");
+			System.out.print("please enter a real course code or 0: ");
 			mf = sc.nextLine().trim();
 		}
 		return str_to_int(mf);
