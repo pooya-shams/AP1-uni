@@ -1,9 +1,12 @@
 package App;
 
+import Exceptions.CourseInterference;
+import Exceptions.TooManyUnits;
 import data.Departments;
 import university.Department;
 import university.Student;
 import university.User;
+import university.course.Course;
 import util.IOHelper;
 
 import java.util.Scanner;
@@ -34,6 +37,42 @@ public class StudentView
 		this.user.remove_course(IOHelper.str_to_int(code));
 	}
 
+	private void add_course()
+	{
+		System.out.println("Choose department:");
+		for(Department dep: Departments.deps)
+		{
+			System.out.println("==========");
+			System.out.println(dep);
+		}
+		int dep_code = IOHelper.get_dep_code(sc);
+		if(dep_code == 0)
+			return;
+		int course_code = IOHelper.get_course_code(sc, dep_code);
+		if(course_code == 0)
+			return;
+		Department dep = Departments.get_dep_by_code(dep_code);
+		if(dep == null)
+			return;
+		Course c = dep.get_course(course_code);
+		if(c == null)
+			return; // god fucking damn it fuck null
+		try
+		{
+			this.user.add_course(c);
+		}
+		catch (TooManyUnits e)
+		{
+			System.out.print("[Error] Too Many Units: ");
+			System.out.println(e.getMessage());
+		}
+		catch (CourseInterference e)
+		{
+			System.out.print("[Error] Course Interference: ");
+			System.out.println(e.getMessage());
+		}
+	}
+
 	public void run()
 	{
 		while(true)
@@ -54,9 +93,7 @@ public class StudentView
 			}
 			else if(type == 2)
 			{
-				for(Department dep: Departments.deps)
-				{
-				}
+				add_course();
 			}
 			else
 			{
