@@ -1,5 +1,7 @@
 package App;
 
+import data.Departments;
+import university.Department;
 import university.Student;
 import university.User;
 import util.IOHelper;
@@ -15,6 +17,21 @@ public class StudentView
 	{
 		this.user = mf;
 		this.sc = sc;
+	}
+
+	private void rem_course()
+	{
+		this.user.print_courses();
+		System.out.print("if you want to remove a course enter its code otherwise enter 0 to go back: ");
+		String code = sc.nextLine().trim();
+		if(code.equals("0"))
+			return;
+		if(!IOHelper.is_numeric(code))
+		{
+			System.out.println("invalid code");
+			return;
+		}
+		this.user.remove_course(IOHelper.str_to_int(code));
 	}
 
 	public void run()
@@ -33,21 +50,13 @@ public class StudentView
 			}
 			else if (type == 1)
 			{
-				this.user.print_courses();
-				System.out.print("if you want to remove a course enter its code otherwise enter 0 to go back: ");
-				String code = sc.nextLine().trim();
-				if(code.equals("0"))
-					continue;
-				if(!IOHelper.is_numeric(code))
-				{
-					System.out.println("invalid code");
-					continue;
-				}
-				this.user.remove_course(IOHelper.str_to_int(code));
+				rem_course();
 			}
 			else if(type == 2)
 			{
-				// TODO
+				for(Department dep: Departments.deps)
+				{
+				}
 			}
 			else
 			{
