@@ -72,9 +72,7 @@ public class IOHelper
 	public static boolean is_real_course_code_in_dep(int dep_code, int n)
 	{
 		Department dep = Departments.get_dep_by_code(dep_code);
-		if(dep == null)
-			return false;
-		return n == 0 || dep.get_course(n) != null;
+		return n == 0 || (dep != null && dep.get_course(n) != null);
 	}
 	public static int get_course_code(Scanner sc, int dep_code)
 	{
