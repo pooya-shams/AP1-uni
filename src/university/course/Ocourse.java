@@ -9,4 +9,10 @@ public class Ocourse extends Course// omoomi
 		super(course_name, instructor_name, exam_date, time, units, capacity, code);
 		super.isEkht = false; // omoomi
 	}
+
+	@Override
+	public int get_omoomi_units()
+	{
+		return 1; // wow such an omoomi course
+	}
 }

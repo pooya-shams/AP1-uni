@@ -9,4 +9,10 @@ public class Ecourse extends Course// ekhtesasi
 		super(course_name, instructor_name, exam_date, time, units, capacity, code);
 		super.isEkht = true; // ekhtesasi
 	}
+
+	@Override
+	public int get_omoomi_units()
+	{
+		return 0; // peak object oriented thinking
+	}
 }

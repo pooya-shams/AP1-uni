@@ -87,6 +87,8 @@ public abstract class Course
 		this.code = code;
 	}
 
+	public abstract int get_omoomi_units();
+
 	public String get_summary()
 	{
 		return (isEkht ? "[Ecourse]" : "[Ocourse]") + this.course_name + " " + this.code;
