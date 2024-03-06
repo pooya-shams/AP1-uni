@@ -2,12 +2,14 @@ package util;
 
 import data.Departments;
 import university.Department;
+import university.Student;
 import university.course.Course;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintStream;
 import java.io.PrintWriter;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -85,5 +87,24 @@ public class IOHelper
 			mf = sc.nextLine().trim();
 		}
 		return str_to_int(mf);
+	}
+	public static Student get_student_by_code(ArrayList<Student> arr, String code)
+	{
+		for(Student s: arr)
+			if(s.getCode().equals(code))
+				return s;
+		return null;
+	}
+	public static Student get_student_code_as_input(ArrayList<Student> arr, Scanner sc) // I deliberately made the name longer in order to differentiate it from the last function
+	{
+		System.out.print("choose student by code (or 0 to go back): ");
+		String mf = sc.nextLine().trim();
+		while( !(mf.equals("0") || get_student_by_code(arr, mf) != null) )
+		{
+			System.out.println("your input '"+mf+"' is not a valid option");
+			System.out.print("please enter a real student code or 0: ");
+			mf = sc.nextLine().trim();
+		}
+		return get_student_by_code(arr, mf); // if null it means code was 0
 	}
 }
