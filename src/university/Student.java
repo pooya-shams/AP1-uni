@@ -1,15 +1,15 @@
 package university;
 
-import Exceptions.CourseInterference;
-import Exceptions.InvalidCode;
-import Exceptions.TooManyUnits;
+import Exceptions.*;
+import data.Users;
 import university.course.Course;
 
 import java.util.ArrayList;
 
 public class Student extends User
 {
-	private final static int max_units = 20;
+	private final static int MAX_UNITS = 20;
+	private final static int MAX_OMOOMI_UNITS = 5;
 	private final String code; // since it is so long
 	private final ArrayList<Course> courses = new ArrayList<>();
 	public Student(String code, String password) throws InvalidCode
@@ -18,6 +18,10 @@ public class Student extends User
 		if(!check_is_numeric(code))
 			throw new InvalidCode("student code: '"+code+"' is invalid");
 		this.code = code;
+	}
+	public String getCode()
+	{
+		return this.code;
 	}
 	private static boolean check_is_numeric(String code)
 	{
@@ -33,15 +37,27 @@ public class Student extends User
 			t += c.getUnits();
 		return t;
 	}
-	public void add_course(Course c) throws TooManyUnits, CourseInterference
+	public int get_omoomi_units()
 	{
-		if(c.getUnits() + this.get_total_units() > Student.max_units)
+		int t = 0;
+		for(Course c: courses)
+			t += c.get_omoomi_units(); // :\
+		return t;
+	}
+	public void add_course(Course c) throws TooManyUnits, CourseInterference, TooManyOmoomi, CourseFullException
+	{
+		if(c.getUnits() + this.get_total_units() > Student.MAX_UNITS)
 			throw new TooManyUnits("you are using too many units");
+		if(c.get_omoomi_units() + this.get_omoomi_units() > Student.MAX_OMOOMI_UNITS)
+			throw new TooManyOmoomi("you are using too many omoomi courses");
 		for(Course oc: this.courses)
 		{
 			if(c.getTime().interferes(oc.getTime()))
-				throw new CourseInterference("this course interferes with old course: "+oc);
+				throw new CourseInterference("this course interferes with old course: "+oc.get_summary());
 		}
+		ArrayList<Student> arr = Users.get_students_by_course(c);
+		if(arr.size() >= c.getCapacity())
+			throw new CourseFullException("course is full with capacity "+c.getCapacity());
 		this.courses.add(c);
 	}
 	public void print_courses()
@@ -54,7 +70,7 @@ public class Student extends User
 		if(this.courses.isEmpty())
 			System.out.println("you have no registered course");
 	}
-	public void remove_course(int code)
+	public void remove_course(int code) // actually should be named try and remove course
 	{
 		int index = -1;
 		for(int i = 0; i < this.courses.size(); i++)
@@ -69,7 +85,17 @@ public class Student extends User
 		else
 		{
 			this.courses.remove(index);
-			System.out.println("removed course with code "+code);
+			System.out.println("removed course with code "+code+" from student "+this.getCode());
 		}
+	}
+	public boolean has_course(Course c)
+	{
+		return this.courses.contains(c);
+	}
+
+	@Override
+	public String toString()
+	{
+		return this.code;
 	}
 }
