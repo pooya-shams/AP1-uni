@@ -87,6 +87,10 @@ public abstract class Course
 		this.code = code;
 	}
 
+	public String get_summary()
+	{
+		return (isEkht ? "[Ecourse]" : "[Ocourse]") + this.course_name + " " + this.code;
+	}
 	@Override
 	public String toString()
 	{
