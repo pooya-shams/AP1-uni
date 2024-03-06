@@ -1,6 +1,8 @@
 package App;
 
+import Exceptions.CourseFullException;
 import Exceptions.CourseInterference;
+import Exceptions.TooManyOmoomi;
 import Exceptions.TooManyUnits;
 import data.Departments;
 import university.Department;
@@ -13,6 +15,7 @@ import java.util.Scanner;
 
 public class StudentView
 {
+	// TODO: create some sort of commands list so it can be extendable
 	private final Student user;
 	private final Scanner sc;
 
@@ -48,18 +51,25 @@ public class StudentView
 		int dep_code = IOHelper.get_dep_code(sc);
 		if(dep_code == 0)
 			return;
+		Department dep = Departments.get_dep_by_code(dep_code);
+		if(dep == null)
+		{
+			System.out.println("unexpected error in add_course: dep");
+			return;
+		}
 		int course_code = IOHelper.get_course_code(sc, dep_code);
 		if(course_code == 0)
 			return;
-		Department dep = Departments.get_dep_by_code(dep_code);
-		if(dep == null)
-			return;
 		Course c = dep.get_course(course_code);
 		if(c == null)
+		{
+			System.out.println("unexpected error in add_course: course");
 			return; // god fucking damn it fuck null
+		}
 		try
 		{
 			this.user.add_course(c);
+			System.out.println("successfully added course (probably)");
 		}
 		catch (TooManyUnits e)
 		{
@@ -69,6 +79,16 @@ public class StudentView
 		catch (CourseInterference e)
 		{
 			System.out.print("[Error] Course Interference: ");
+			System.out.println(e.getMessage());
+		}
+		catch (TooManyOmoomi e)
+		{
+			System.out.print("[Error] Too Many Omoomi: ");
+			System.out.println(e.getMessage());
+		}
+		catch (CourseFullException e)
+		{
+			System.out.print("[Error] Course is Full: ");
 			System.out.println(e.getMessage());
 		}
 	}

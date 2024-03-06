@@ -85,7 +85,7 @@ public class Application
 			if(password.equals(Users.admin.getPassword()))
 			{
 				System.out.println("Congrats you hacked the mainframe");
-				new AdminView(Users.admin).run();
+				new AdminView(Users.admin, sc).run();
 			}
 			else
 			{
