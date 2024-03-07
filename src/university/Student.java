@@ -53,7 +53,9 @@ public class Student extends User
 		for(Course oc: this.courses)
 		{
 			if(c.getTime().interferes(oc.getTime()))
-				throw new CourseInterference("this course interferes with old course: "+oc.get_summary());
+				throw new CourseInterference("this course's time interferes with old course: "+oc.get_summary());
+			if(c.getExam_date().interferes(oc.getExam_date()))
+				throw new CourseInterference("this course's exam date interferes with old course: "+oc.get_summary());
 		}
 		ArrayList<Student> arr = Users.get_students_by_course(c);
 		if(arr.size() >= c.getCapacity())
