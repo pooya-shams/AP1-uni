@@ -1,12 +1,12 @@
 package util;
 
-public class Date // week day + hour + length
+public class CourseTime // week day + hour + length
 {
 	private boolean even_days;
 	private int start;
 	private int length;
 
-	public Date(boolean even_days, int start, int length)
+	public CourseTime(boolean even_days, int start, int length)
 	{
 		this.even_days = even_days;
 		this.start = start;
@@ -19,11 +19,11 @@ public class Date // week day + hour + length
 	{
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
-		Date date = (Date) o;
-		return even_days == date.even_days && start == date.start && length == date.length;
+		CourseTime courseTime = (CourseTime) o;
+		return even_days == courseTime.even_days && start == courseTime.start && length == courseTime.length;
 	}
 
-	public boolean interferes(Date o) // checks if a course interferes with another course
+	public boolean interferes(CourseTime o) // checks if a course interferes with another course
 	{
 		if(o == null) return false;
 		if(this.even_days != o.even_days) return false;

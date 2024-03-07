@@ -3,10 +3,9 @@ package data;
 import Exceptions.InvalidCode;
 import university.Admin;
 import university.Student;
-import university.User;
 import university.course.Course;
 import university.course.Ecourse;
-import util.Date;
+import util.CourseTime;
 
 import java.util.ArrayList;
 
@@ -44,7 +43,7 @@ public class Users // static data class
 			studnets.add(new Student("402111002", "bad password"));
 			try
 			{
-				studnets.get(0).add_course(new Ecourse("riz 1", "mogh", "1998/01/10", new Date(false, 12, 2), 4, 45, 22015));
+				studnets.get(0).add_course(new Ecourse("riz 1", "mogh", "1998/01/10", new CourseTime(false, 12, 2), 4, 45, 22015));
 			}
 			catch (Exception e)
 			{
