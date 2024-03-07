@@ -6,6 +6,7 @@ import university.Student;
 import university.course.Course;
 import university.course.Ecourse;
 import util.CourseTime;
+import util.ExamDate;
 
 import java.util.ArrayList;
 
@@ -43,7 +44,7 @@ public class Users // static data class
 			studnets.add(new Student("402111002", "bad password"));
 			try
 			{
-				studnets.get(0).add_course(new Ecourse("riz 1", "mogh", "1998/01/10", new CourseTime(false, 12, 2), 4, 45, 22015));
+				studnets.get(0).add_course(new Ecourse("riz 1", "mogh", new ExamDate(2024, 3, 4, 12, 1), new CourseTime(false, 12, 2), 4, 45, 22015));
 			}
 			catch (Exception e)
 			{

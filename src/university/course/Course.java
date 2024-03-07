@@ -1,19 +1,20 @@
 package university.course;
 
 import util.CourseTime;
+import util.ExamDate;
 
 public abstract class Course
 {
 	private String course_name;
 	private String instructor_name;
-	private String exam_date;
+	private ExamDate exam_date;
 	private CourseTime time;
 	private int units;
 	private int capacity;
 	private int code;
 	protected boolean isEkht; // is ekhtesasi or not
 
-	public Course(String course_name, String instructor_name, String exam_date, CourseTime time, int units, int capacity, int code)
+	public Course(String course_name, String instructor_name, ExamDate exam_date, CourseTime time, int units, int capacity, int code)
 	{
 		this.course_name = course_name;
 		this.instructor_name = instructor_name;
@@ -42,11 +43,11 @@ public abstract class Course
 		this.instructor_name = instructor_name;
 	}
 
-	public String getExam_date()
+	public ExamDate getExam_date()
 	{
 		return exam_date;
 	}
-	public void setExam_date(String exam_date)
+	public void setExam_date(ExamDate exam_date)
 	{
 		this.exam_date = exam_date;
 	}
