@@ -41,4 +41,20 @@ public class ExamDate
 	{
 		return length;
 	}
+
+	private int getl()
+	{
+		return this.start;
+	}
+	private int getr()
+	{
+		return this.start+this.length;
+	}
+
+	public boolean interferes(ExamDate o)
+	{
+		if(o == null) return false;
+		if(this.year != o.year || this.month != o.month || this.day != o.day) return false;
+		return this.getr() > o.getl() && o.getr() > this.getl();
+	}
 }
