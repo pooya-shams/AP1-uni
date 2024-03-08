@@ -1,6 +1,7 @@
 package data;
 
 import university.Department;
+import university.course.Course;
 import university.course.Ocourse;
 import util.CourseTime;
 import util.ExamDate;
@@ -27,6 +28,16 @@ public class Departments
 		for(Department dep: deps)
 			if(dep.getCode() == n)
 				return dep;
+		return null;
+	}
+	public static Course search_for_course_by_code(int code) // null means we didn't find shit
+	{
+		for(Department dep: deps)
+		{
+			Course f = dep.get_course(code);
+			if(f != null)
+				return f;
+		}
 		return null;
 	}
 	public static void load_file()

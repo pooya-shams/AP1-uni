@@ -2,10 +2,12 @@ package university;
 
 import Exceptions.*;
 import FileIO.JsonAble;
+import data.Departments;
 import data.Users;
 import university.course.Course;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 public class Student extends User implements JsonAble
 {
@@ -118,5 +120,27 @@ public class Student extends User implements JsonAble
 		}
 		out.append("]}");
 		return out.toString();
+	}
+
+	public static Student fromJson(Map<String, Object> js) throws InvalidCode
+	{
+		Student out = new Student(
+			(String) (js.get("code")),
+			(String) (js.get("password"))
+		);
+		for(int code: (Integer[])(js.get("courses")))
+		{
+			Course c = Departments.search_for_course_by_code(code);
+			if(c == null)
+			{
+				System.out.println("[WARNING] couldn't find course with code '"+code+"' load file before adding user");
+				System.out.println("didn't add that course");
+			}
+			else
+			{
+				out.courses.add(c);
+			}
+		}
+		return out;
 	}
 }
