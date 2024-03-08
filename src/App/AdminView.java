@@ -210,11 +210,11 @@ public class AdminView
 		Course course;
 		if(e == 1)
 		{
-			course = new Ecourse(course_name, instructor_name, exam_date, time, units, capacity, code);
+			course = new Ecourse(course_name, instructor_name, exam_date, time, units, capacity, code, dep.getCode());
 		}
 		else
 		{
-			course = new Ocourse(course_name, instructor_name, exam_date, time, units, capacity, code);
+			course = new Ocourse(course_name, instructor_name, exam_date, time, units, capacity, code, dep.getCode());
 		}
 		dep.add_course(course);
 	}

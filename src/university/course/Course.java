@@ -16,9 +16,10 @@ public abstract class Course implements JsonAble
 	private int units;
 	private int capacity;
 	private int code;
+	private int dep_code;
 	protected boolean isEkht; // is ekhtesasi or not
 
-	public Course(String course_name, String instructor_name, ExamDate exam_date, CourseTime time, int units, int capacity, int code)
+	public Course(String course_name, String instructor_name, ExamDate exam_date, CourseTime time, int units, int capacity, int code, int dep_code)
 	{
 		this.course_name = course_name;
 		this.instructor_name = instructor_name;
@@ -27,6 +28,7 @@ public abstract class Course implements JsonAble
 		this.units = units;
 		this.capacity = capacity;
 		this.code = code;
+		this.dep_code = dep_code;
 	}
 
 	public String getCourse_name()
@@ -92,6 +94,15 @@ public abstract class Course implements JsonAble
 		this.code = code;
 	}
 
+	public int getDep_code()
+	{
+		return dep_code;
+	}
+	public void setDep_code(int dep_code)
+	{
+		this.dep_code = dep_code;
+	}
+
 	public abstract int get_omoomi_units();
 
 	public String get_summary()
@@ -107,7 +118,8 @@ public abstract class Course implements JsonAble
 			"time: " + this.time + "\n" +
 			"units: " + this.units + "\n" +
 			"capacity: " + this.capacity + "\n" +
-			"code: " + this.code + "\n";
+			"code: " + this.code + "\n" +
+			"dep code: " + this.dep_code + "\n";
 	}
 
 	@Override
@@ -120,6 +132,7 @@ public abstract class Course implements JsonAble
 			+ ", units: " + units
 			+ ", capacity: " + capacity
 			+ ", code: " + code
+			+ ", dep_code: " + dep_code
 			+ ", isEkht: " + isEkht
 			+ "}";
 	}
@@ -136,7 +149,8 @@ public abstract class Course implements JsonAble
 				CourseTime.fromJson((Map<String, Object>)js.get("time")),
 				(Integer)(js.get("units")),
 				(Integer)(js.get("capacity")),
-				(Integer)(js.get("code"))
+				(Integer)(js.get("code")),
+				(Integer)(js.get("dep_code"))
 			);
 		}
 		else
@@ -148,7 +162,8 @@ public abstract class Course implements JsonAble
 				CourseTime.fromJson((Map<String, Object>)js.get("time")),
 				(Integer)(js.get("units")),
 				(Integer)(js.get("capacity")),
-				(Integer)(js.get("code"))
+				(Integer)(js.get("code")),
+				(Integer)(js.get("dep_code"))
 			);
 		}
 	}

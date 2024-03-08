@@ -44,7 +44,7 @@ public class Users // static data class
 			studnets.add(new Student("402111002", "bad password"));
 			try
 			{
-				studnets.get(0).add_course(new Ecourse("riz 1", "mogh", new ExamDate(2024, 3, 4, 12, 1), new CourseTime(false, 12, 2), 4, 45, 22015));
+				studnets.get(0).add_course(new Ecourse("riz 1", "mogh", new ExamDate(2024, 3, 4, 12, 1), new CourseTime(false, 12, 2), 4, 45, 22015, 1));
 			}
 			catch (Exception e)
 			{

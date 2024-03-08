@@ -20,8 +20,8 @@ public class Departments
 		deps.add(new Department("Electrical Engineering", 2));
 		deps.add(new Department("Computer Engineering", 3));
 		deps.add(new Department("Physics", 4));
-		deps.get(0).add_course(new Ocourse("Riz 1", "mogh adasi", new ExamDate(2024, 3, 2, 11, 1), new CourseTime(true, 12, 2), 4, 42, 22015));
-		deps.get(3).add_course(new Ocourse("Phys 1", "mogh imi", new ExamDate(2024, 3, 5, 11, 1), new CourseTime(true, 11, 2), 3, 56, 36011));
+		deps.get(0).add_course(new Ocourse("Riz 1", "mogh adasi", new ExamDate(2024, 3, 2, 11, 1), new CourseTime(true, 12, 2), 4, 42, 22015, 1));
+		deps.get(3).add_course(new Ocourse("Phys 1", "mogh imi", new ExamDate(2024, 3, 5, 11, 1), new CourseTime(true, 11, 2), 3, 56, 36011, 4));
 	}
 	public static Department get_dep_by_code(int n)
 	{
