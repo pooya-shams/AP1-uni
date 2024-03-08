@@ -55,6 +55,7 @@ public class Loader
 		catch (Exception e)
 		{
 			System.out.println("unhandled exception in loading users don't know what to do");
+			e.printStackTrace();
 		}
 	}
 	public static void write_courses(File file)

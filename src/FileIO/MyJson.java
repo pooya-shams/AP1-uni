@@ -90,7 +90,10 @@ public class MyJson
 	}
 	public static Integer[] parseArray(String js) // a list (of integers currently)
 	{
-		String[] split = js.substring(1, js.length()-1).split(",");
+		js = js.substring(1, js.length()-1);
+		if(js.isEmpty())
+			return new Integer[0];
+		String[] split = js.split(",");
 		Integer[] out = new Integer[split.length];
 		for (int i = 0; i < split.length; i++)
 			out[i] = Integer.parseInt(split[i].trim());
