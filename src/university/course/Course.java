@@ -1,9 +1,10 @@
 package university.course;
 
+import FileIO.JsonAble;
 import util.CourseTime;
 import util.ExamDate;
 
-public abstract class Course
+public abstract class Course implements JsonAble
 {
 	private String course_name;
 	private String instructor_name;
@@ -104,5 +105,19 @@ public abstract class Course
 			"units: " + this.units + "\n" +
 			"capacity: " + this.capacity + "\n" +
 			"code: " + this.code + "\n";
+	}
+
+	@Override
+	public String toJson()
+	{
+		return "{type:Course, " + "course_name: '" + course_name + "'"
+			+ ", instructor_name: '" + instructor_name + "'"
+			+ ", exam_date: " + exam_date.toJson()
+			+ ", time: " + time.toJson()
+			+ ", units: " + units
+			+ ", capacity: " + capacity
+			+ ", code: " + code
+			+ ", isEkht: " + isEkht
+			+ "}";
 	}
 }
