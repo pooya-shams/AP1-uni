@@ -7,8 +7,8 @@ public class Main
 {
 	public static void main(String[] args)
 	{
-		Users.populate_users();
 		Departments.populate_deps();
+		Users.populate_users();
 		Application app = new Application();
 		app.run();
 	}

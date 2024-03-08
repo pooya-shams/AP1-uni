@@ -41,10 +41,6 @@ public class Users // static data class
 		// being here means we didn't enter the if statement in the loop
 		studnets.add(mf);
 	}
-	public static void get_and_add_user()
-	{
-		// TODO
-	}
 	public static ArrayList<Student> get_students_by_course(Course c)
 	{
 		ArrayList<Student> out = new ArrayList<>();
@@ -66,7 +62,9 @@ public class Users // static data class
 			studnets.add(new Student("402111002", "bad password"));
 			try
 			{
-				studnets.get(0).add_course(new Ecourse("riz 1", "mogh", new ExamDate(2024, 3, 4, 12, 1), new CourseTime(false, 12, 2), 4, 45, 22015, 1));
+				studnets.get(0).add_course(Departments.search_for_course_by_code(22015));
+				studnets.get(1).add_course(Departments.search_for_course_by_code(22016));
+				studnets.get(2).add_course(Departments.search_for_course_by_code(23011));
 			}
 			catch (Exception e)
 			{
