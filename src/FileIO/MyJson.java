@@ -42,8 +42,8 @@ public class MyJson
 
 	private static Pair get_pair(String p)
 	{
-		String[] a = p.split(":");
-		return new Pair(a[0].trim(), a[1].trim());
+		int mf = p.indexOf(":");
+		return new Pair(p.substring(0, mf).trim(), p.substring(mf+1).trim());
 	}
 
 	private static ArrayList<Integer> get_splts(String js)
