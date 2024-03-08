@@ -57,4 +57,16 @@ public class ExamDate
 		if(this.year != o.year || this.month != o.month || this.day != o.day) return false;
 		return this.getr() > o.getl() && o.getr() > this.getl();
 	}
+
+	@Override
+	public String toString()
+	{
+		return "ExamDate{" +
+			"year=" + year +
+			", month=" + month +
+			", day=" + day +
+			", start=" + start +
+			", length=" + length +
+			'}';
+	}
 }
