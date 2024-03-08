@@ -1,6 +1,7 @@
 package App;
 
 import Exceptions.InvalidCode;
+import Exceptions.UserAlreadyExists;
 import data.Users;
 import university.Student;
 import university.User;
@@ -86,6 +87,11 @@ public class Application
 		catch (InvalidCode e)
 		{
 			System.out.println("[ERROR] you entered an invalid student code. aborting");
+			System.out.println(e.getMessage());
+		}
+		catch (UserAlreadyExists e)
+		{
+			System.out.println("[ERROR] invalid username");
 			System.out.println(e.getMessage());
 		}
 	}

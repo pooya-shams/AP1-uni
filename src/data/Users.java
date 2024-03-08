@@ -1,6 +1,7 @@
 package data;
 
 import Exceptions.InvalidCode;
+import Exceptions.UserAlreadyExists;
 import university.Admin;
 import university.Student;
 import university.course.Course;
@@ -15,8 +16,13 @@ public class Users // static data class
 	public static final ArrayList<Student> studnets = new ArrayList<>();
 	public static final Admin admin = new Admin();
 	private static boolean lock_populate = false; // haha try running that twice now
-	public static void add_user(Student mf)
+	public static void add_user(Student mf) throws UserAlreadyExists
 	{
+		if(mf == null)
+			throw new IllegalArgumentException("student shouldn't be null");
+		for(Student st: studnets)
+			if(mf.getUsername().equals(st.getUsername()))
+				throw new UserAlreadyExists("user with username '"+mf.getUsername()+"' already exists");
 		studnets.add(mf);
 	}
 	public static ArrayList<Student> get_students_by_course(Course c)
