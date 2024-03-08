@@ -12,6 +12,8 @@ public class LineReader
 	public String nextLine()
 	{
 		String s = sc.nextLine();
-		return s.substring(0, s.length()-1); // without \n at the end
+		if(s.charAt(s.length()-1) == '\n')
+			return s.substring(0, s.length()-1);
+		return s.substring(0, s.length()); // without \n at the end
 	}
 }
