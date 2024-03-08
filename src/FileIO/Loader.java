@@ -22,6 +22,7 @@ public class Loader
 			PrintWriter pw = new PrintWriter(fw);
 			for(Student st: Users.studnets)
 				pw.println(st.toJson()); // each line is exactly one student
+			fw.close();
 		}
 		catch (IOException e)
 		{
@@ -67,6 +68,7 @@ public class Loader
 				for(Course c: dep.getCourses())
 					pw.println(c.toJson());
 			}
+			fw.close();
 		}
 		catch (IOException e)
 		{
