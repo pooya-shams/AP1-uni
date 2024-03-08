@@ -1,6 +1,8 @@
 package util;
 
-public class ExamDate
+import FileIO.JsonAble;
+
+public class ExamDate implements JsonAble
 {
 	private final int year;
 	private final int month;
@@ -68,5 +70,11 @@ public class ExamDate
 			", start=" + start +
 			", length=" + length +
 			'}';
+	}
+
+	@Override
+	public String toJson()
+	{
+		return "{type: ExamDate, " + "year:" + year + ", month:" + month + ", day:" + day + ", start:" + start + ", length:" + length + "}";
 	}
 }
