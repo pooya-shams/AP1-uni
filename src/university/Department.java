@@ -42,6 +42,18 @@ public class Department
 				return c;
 		return null;
 	}
+	public void remove_course(Course c)
+	{
+		int idx = this.courses.indexOf(c);
+		if (idx == -1)
+		{
+			System.out.println("invalid course can not remove");
+		}
+		else
+		{
+			this.courses.remove(idx);
+		}
+	}
 
 	public String get_summary()
 	{

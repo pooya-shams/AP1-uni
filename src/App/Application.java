@@ -4,12 +4,13 @@ import data.Users;
 import university.Student;
 import university.User;
 import util.IOHelper;
+import util.LineReader;
 
 import java.util.Scanner;
 
 public class Application
 {
-	private final Scanner sc = new Scanner(System.in);
+	private final LineReader sc = new LineReader(new Scanner(System.in));
 	public Application()
 	{
 	}
@@ -52,9 +53,9 @@ public class Application
 	private void student_login() // oh and also camel case is nonsense
 	{
 		System.out.print("enter your username: ");
-		String username = sc.nextLine().trim();
+		String username = sc.nextLine();
 		System.out.print("enter your password (can't end with whitespace): ");
-		String password = sc.nextLine().trim();
+		String password = sc.nextLine();
 		for(Student mf: Users.studnets) // relies on the fact that there wont be duplicate usernames
 		{
 			if(username.equals(mf.getUsername()))
@@ -77,9 +78,9 @@ public class Application
 	private void admin_login()
 	{
 		System.out.print("enter your username: ");
-		String username = sc.nextLine().trim();
+		String username = sc.nextLine();
 		System.out.print("enter your password (can't end with whitespace): ");
-		String password = sc.nextLine().trim();
+		String password = sc.nextLine();
 		if(username.equals(Users.admin.getUsername()))
 		{
 			if(password.equals(Users.admin.getPassword()))

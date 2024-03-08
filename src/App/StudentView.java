@@ -10,6 +10,7 @@ import university.Student;
 import university.User;
 import university.course.Course;
 import util.IOHelper;
+import util.LineReader;
 
 import java.util.Scanner;
 
@@ -17,9 +18,9 @@ public class StudentView
 {
 	// TODO: create some sort of commands list so it can be extendable
 	private final Student user;
-	private final Scanner sc;
+	private final LineReader sc;
 
-	public StudentView(Student mf, Scanner sc)
+	public StudentView(Student mf, LineReader sc)
 	{
 		this.user = mf;
 		this.sc = sc;
@@ -29,7 +30,7 @@ public class StudentView
 	{
 		this.user.print_courses();
 		System.out.print("if you want to remove a course enter its code otherwise enter 0 to go back: ");
-		String code = sc.nextLine().trim();
+		String code = sc.nextLine();
 		if(code.equals("0"))
 			return;
 		if(!IOHelper.is_numeric(code))
@@ -57,7 +58,7 @@ public class StudentView
 			System.out.println("unexpected error in add_course: dep");
 			return;
 		}
-		int course_code = IOHelper.get_course_code(sc, dep_code);
+		int course_code = IOHelper.get_course_code(sc, dep);
 		if(course_code == 0)
 			return;
 		Course c = dep.get_course(course_code);
