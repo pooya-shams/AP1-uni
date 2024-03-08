@@ -19,6 +19,22 @@ public class Users // static data class
 	{
 		studnets.add(mf);
 	}
+	public static void add_and_replace_user(Student mf)
+	{
+		if(mf == null)
+			throw new IllegalArgumentException("student shouldn't be null");
+		for(int i = 0; i < studnets.size(); i++)
+		{
+			Student st = studnets.get(i);
+			if (mf.getUsername().equals(st.getUsername()))
+			{
+				studnets.set(i, mf);
+				return;
+			}
+		}
+		// being here means we didn't enter the if statement in the loop
+		studnets.add(mf);
+	}
 	public static void get_and_add_user()
 	{
 		// TODO

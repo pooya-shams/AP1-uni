@@ -41,7 +41,7 @@ public class Loader
 				stds.add(st);
 			}
 			for(Student st: stds)
-				Users.add_user(st);
+				Users.add_and_replace_user(st);
 		}
 		catch (FileNotFoundException e)
 		{
