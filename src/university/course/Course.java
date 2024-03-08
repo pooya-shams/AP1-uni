@@ -1,8 +1,11 @@
 package university.course;
 
 import FileIO.JsonAble;
+import FileIO.MyJson;
 import util.CourseTime;
 import util.ExamDate;
+
+import java.util.Map;
 
 public abstract class Course implements JsonAble
 {
@@ -119,5 +122,34 @@ public abstract class Course implements JsonAble
 			+ ", code: " + code
 			+ ", isEkht: " + isEkht
 			+ "}";
+	}
+
+	public static Course fromJson(Map<String, Object> js)
+	{
+		boolean ise = (Boolean)(js.get("isEkht"));
+		if(ise)
+		{
+			return new Ecourse(
+				(String)js.get("course_name"),
+				(String)js.get("instructor_name"),
+				ExamDate.fromJson((Map<String, Object>)js.get("exam_date")),
+				CourseTime.fromJson((Map<String, Object>)js.get("time")),
+				(Integer)(js.get("units")),
+				(Integer)(js.get("capacity")),
+				(Integer)(js.get("code"))
+			);
+		}
+		else
+		{
+			return new Ocourse(
+				(String)js.get("course_name"),
+				(String)js.get("instructor_name"),
+				ExamDate.fromJson((Map<String, Object>)js.get("exam_date")),
+				CourseTime.fromJson((Map<String, Object>)js.get("time")),
+				(Integer)(js.get("units")),
+				(Integer)(js.get("capacity")),
+				(Integer)(js.get("code"))
+			);
+		}
 	}
 }
