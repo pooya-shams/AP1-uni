@@ -92,6 +92,7 @@ public class Application
 		{
 			Student st = new Student(username, password);
 			Users.add_user(st);
+			Loader.write_users();
 		}
 		catch (InvalidCode e)
 		{
