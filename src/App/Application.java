@@ -2,6 +2,7 @@ package App;
 
 import Exceptions.InvalidCode;
 import Exceptions.UserAlreadyExists;
+import FileIO.Loader;
 import data.Users;
 import university.Student;
 import university.User;
@@ -20,6 +21,14 @@ public class Application
 	{
 		System.out.println("Welcome!");
 		System.out.println("you can always go back by typing 0");
+		try
+		{
+			Loader.load_users(); // by default
+		}
+		catch (Exception e)
+		{
+			System.out.println("I'm unlucky");
+		}
 		while(true)
 		{
 			System.out.println(

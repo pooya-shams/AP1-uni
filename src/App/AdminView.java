@@ -4,6 +4,7 @@ import Exceptions.CourseFullException;
 import Exceptions.CourseInterference;
 import Exceptions.TooManyOmoomi;
 import Exceptions.TooManyUnits;
+import FileIO.Loader;
 import data.Departments;
 import data.Users;
 import university.Admin;
@@ -17,6 +18,7 @@ import util.ExamDate;
 import util.IOHelper;
 import util.LineReader;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -210,11 +212,11 @@ public class AdminView
 		Course course;
 		if(e == 1)
 		{
-			course = new Ecourse(course_name, instructor_name, exam_date, time, units, capacity, code);
+			course = new Ecourse(course_name, instructor_name, exam_date, time, units, capacity, code, dep.getCode());
 		}
 		else
 		{
-			course = new Ocourse(course_name, instructor_name, exam_date, time, units, capacity, code);
+			course = new Ocourse(course_name, instructor_name, exam_date, time, units, capacity, code, dep.getCode());
 		}
 		dep.add_course(course);
 	}
@@ -298,15 +300,30 @@ public class AdminView
 		do_dep_actions(dep);
 	}
 
+	private void load_course()
+	{
+		System.out.print("please enter a filename to load from (normal stuff please): ");
+		Loader.load_courses(new File(sc.nextLine()));
+		Loader.load_users(); // in case new courses are added for some students
+	}
+
+	private void write_courses()
+	{
+		System.out.print("please enter a filename to write to (normal stuff please): ");
+		Loader.write_courses(new File(sc.nextLine()));
+	}
+
 	public void run()
 	{
 		while(true)
 		{
 			System.out.println(
 				"[0] go back\n"+
-				"[1] show departments"
+				"[1] show departments\n"+
+				"[2] load courses from a file (import)\n"+
+				"[3] write course to a file (export)"
 			);
-			int type = IOHelper.get_valid_input(1, this.sc);
+			int type = IOHelper.get_valid_input(3, this.sc);
 			if(type == 0)
 			{
 				System.out.println("logging out of admin");
@@ -315,6 +332,14 @@ public class AdminView
 			else if(type == 1)
 			{
 				show_deps();
+			}
+			else if(type == 2)
+			{
+				load_course();
+			}
+			else if(type == 3)
+			{
+				write_courses();
 			}
 			else
 			{

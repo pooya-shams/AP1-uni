@@ -1,9 +1,13 @@
 package university.course;
 
+import FileIO.JsonAble;
+import FileIO.MyJson;
 import util.CourseTime;
 import util.ExamDate;
 
-public abstract class Course
+import java.util.Map;
+
+public abstract class Course implements JsonAble
 {
 	private String course_name;
 	private String instructor_name;
@@ -12,9 +16,10 @@ public abstract class Course
 	private int units;
 	private int capacity;
 	private int code;
+	private int dep_code;
 	protected boolean isEkht; // is ekhtesasi or not
 
-	public Course(String course_name, String instructor_name, ExamDate exam_date, CourseTime time, int units, int capacity, int code)
+	public Course(String course_name, String instructor_name, ExamDate exam_date, CourseTime time, int units, int capacity, int code, int dep_code)
 	{
 		this.course_name = course_name;
 		this.instructor_name = instructor_name;
@@ -23,6 +28,7 @@ public abstract class Course
 		this.units = units;
 		this.capacity = capacity;
 		this.code = code;
+		this.dep_code = dep_code;
 	}
 
 	public String getCourse_name()
@@ -88,6 +94,15 @@ public abstract class Course
 		this.code = code;
 	}
 
+	public int getDep_code()
+	{
+		return dep_code;
+	}
+	public void setDep_code(int dep_code)
+	{
+		this.dep_code = dep_code;
+	}
+
 	public abstract int get_omoomi_units();
 
 	public String get_summary()
@@ -103,6 +118,53 @@ public abstract class Course
 			"time: " + this.time + "\n" +
 			"units: " + this.units + "\n" +
 			"capacity: " + this.capacity + "\n" +
-			"code: " + this.code + "\n";
+			"code: " + this.code + "\n" +
+			"dep code: " + this.dep_code + "\n";
+	}
+
+	@Override
+	public String toJson()
+	{
+		return "{type:Course, " + "course_name: '" + course_name + "'"
+			+ ", instructor_name: '" + instructor_name + "'"
+			+ ", exam_date: " + exam_date.toJson()
+			+ ", time: " + time.toJson()
+			+ ", units: " + units
+			+ ", capacity: " + capacity
+			+ ", code: " + code
+			+ ", dep_code: " + dep_code
+			+ ", isEkht: " + isEkht
+			+ "}";
+	}
+
+	public static Course fromJson(Map<String, Object> js)
+	{
+		boolean ise = (Boolean)(js.get("isEkht"));
+		if(ise)
+		{
+			return new Ecourse(
+				(String)js.get("course_name"),
+				(String)js.get("instructor_name"),
+				ExamDate.fromJson((Map<String, Object>)js.get("exam_date")),
+				CourseTime.fromJson((Map<String, Object>)js.get("time")),
+				(Integer)(js.get("units")),
+				(Integer)(js.get("capacity")),
+				(Integer)(js.get("code")),
+				(Integer)(js.get("dep_code"))
+			);
+		}
+		else
+		{
+			return new Ocourse(
+				(String)js.get("course_name"),
+				(String)js.get("instructor_name"),
+				ExamDate.fromJson((Map<String, Object>)js.get("exam_date")),
+				CourseTime.fromJson((Map<String, Object>)js.get("time")),
+				(Integer)(js.get("units")),
+				(Integer)(js.get("capacity")),
+				(Integer)(js.get("code")),
+				(Integer)(js.get("dep_code"))
+			);
+		}
 	}
 }

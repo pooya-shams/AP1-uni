@@ -1,6 +1,10 @@
 package util;
 
-public class CourseTime // week day + hour + length
+import FileIO.JsonAble;
+
+import java.util.Map;
+
+public class CourseTime implements JsonAble// week day + hour + length
 {
 	private boolean even_days;
 	private int start;
@@ -70,5 +74,20 @@ public class CourseTime // week day + hour + length
 	public String toString()
 	{
 		return (this.even_days ? "Saturday & Monday" : "Sunday & Tuesday") + " from " + start + " until " + (start+length);
+	}
+
+	@Override
+	public String toJson()
+	{
+		return "{type: CourseTime, " + "even_days: " + even_days + ", start: " + start + ", length: " + length + "}";
+	}
+
+	public static CourseTime fromJson(Map<String, Object> js)
+	{
+		return new CourseTime(
+			(Boolean)(js.get("even_days")),
+			(Integer)(js.get("start")),
+			(Integer)(js.get("length"))
+		);
 	}
 }

@@ -25,6 +25,26 @@ public class Users // static data class
 				throw new UserAlreadyExists("user with username '"+mf.getUsername()+"' already exists");
 		studnets.add(mf);
 	}
+	public static void add_and_replace_user(Student mf)
+	{
+		if(mf == null)
+			throw new IllegalArgumentException("student shouldn't be null");
+		for(int i = 0; i < studnets.size(); i++)
+		{
+			Student st = studnets.get(i);
+			if (mf.getUsername().equals(st.getUsername()))
+			{
+				studnets.set(i, mf);
+				return;
+			}
+		}
+		// being here means we didn't enter the if statement in the loop
+		studnets.add(mf);
+	}
+	public static void get_and_add_user()
+	{
+		// TODO
+	}
 	public static ArrayList<Student> get_students_by_course(Course c)
 	{
 		ArrayList<Student> out = new ArrayList<>();
@@ -46,7 +66,7 @@ public class Users // static data class
 			studnets.add(new Student("402111002", "bad password"));
 			try
 			{
-				studnets.get(0).add_course(new Ecourse("riz 1", "mogh", new ExamDate(2024, 3, 4, 12, 1), new CourseTime(false, 12, 2), 4, 45, 22015));
+				studnets.get(0).add_course(new Ecourse("riz 1", "mogh", new ExamDate(2024, 3, 4, 12, 1), new CourseTime(false, 12, 2), 4, 45, 22015, 1));
 			}
 			catch (Exception e)
 			{
