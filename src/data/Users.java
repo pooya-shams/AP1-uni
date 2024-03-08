@@ -19,10 +19,6 @@ public class Users // static data class
 	{
 		studnets.add(mf);
 	}
-	public static void get_and_add_user()
-	{
-		// TODO
-	}
 	public static ArrayList<Student> get_students_by_course(Course c)
 	{
 		ArrayList<Student> out = new ArrayList<>();
