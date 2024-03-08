@@ -82,7 +82,7 @@ public class MyJson
 		int last = 1;
 		for(int idx: splts)
 		{
-			Pair p = get_pair(js.substring(last, idx-1));
+			Pair p = get_pair(js.substring(last, idx));
 			out.put(p.getX(), MyJson.parseStuff(p.getY()) );
 			last = idx+1;
 		}
