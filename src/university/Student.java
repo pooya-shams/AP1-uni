@@ -1,12 +1,13 @@
 package university;
 
 import Exceptions.*;
+import FileIO.JsonAble;
 import data.Users;
 import university.course.Course;
 
 import java.util.ArrayList;
 
-public class Student extends User
+public class Student extends User implements JsonAble
 {
 	private final static int MAX_UNITS = 20;
 	private final static int MAX_OMOOMI_UNITS = 5;
@@ -99,5 +100,23 @@ public class Student extends User
 	public String toString()
 	{
 		return this.code;
+	}
+
+	@Override
+	public String toJson()
+	{
+		StringBuilder out = new StringBuilder();
+		out.append("{type: Student, ");
+		out.append("code: '"+this.code+"', "); // same as username
+		out.append("password: '"+this.getPassword()+"', ");
+		out.append("courses: [");
+		for(int i = 0; i < this.courses.size(); i++)
+		{
+			out.append(this.courses.get(i).getCode());
+			if(i != this.courses.size()-1)
+				out.append(", ");
+		}
+		out.append("]}");
+		return out.toString();
 	}
 }
