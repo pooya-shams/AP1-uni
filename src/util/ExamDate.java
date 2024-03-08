@@ -2,6 +2,8 @@ package util;
 
 import FileIO.JsonAble;
 
+import java.util.Map;
+
 public class ExamDate implements JsonAble
 {
 	private final int year;
@@ -76,5 +78,16 @@ public class ExamDate implements JsonAble
 	public String toJson()
 	{
 		return "{type: ExamDate, " + "year:" + year + ", month:" + month + ", day:" + day + ", start:" + start + ", length:" + length + "}";
+	}
+
+	public static ExamDate fromJson(Map<String, Object> js)
+	{
+		return new ExamDate(
+			(Integer)(js.get("year")),
+			(Integer)(js.get("month")),
+			(Integer)(js.get("day")),
+			(Integer)(js.get("start")),
+			(Integer)(js.get("length"))
+		);
 	}
 }
